@@ -42,7 +42,7 @@ func NewMfaError(errCode string, mfaCode string, mobileNumberVerified bool) erro
 		Detail:         			errCode,
 		Status:         			http.StatusText(int(428)),
 	  MfaCode: 							mfaCode,
-		MobileNumberVerified:	&wrappers.BoolValue{Value: mobileNumberVerified} 
+		MobileNumberVerified:	&wrappers.BoolValue{Value: mobileNumberVerified},
 	}
 }
 
