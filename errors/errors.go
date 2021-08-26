@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"github.com/golang/protobuf/ptypes/wrappers"
 )
 
 //go:generate protoc -I. --go_out=paths=source_relative:. errors.proto
