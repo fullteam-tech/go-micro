@@ -35,6 +35,17 @@ func NewValidateError(v map[string]*ValidateErrors) error {
 	}
 }
 
+func NewMfaError(errCode string, mfaCode string, mobileNumberVerified bool) error {
+	return &Error{
+		Id:             			"428",
+		Code:           			428,
+		Detail:         			errCode,
+		Status:         			http.StatusText(int(428)),
+	  MfaCode: 							mfaCode,
+		MobileNumberVerified:	&wrappers.BoolValue{Value: mobileNumberVerified} 
+	}
+}
+
 // Parse tries to parse a JSON string into an error. If that
 // fails, it will set the given string as the error detail.
 func Parse(err string) *Error {

@@ -4,12 +4,16 @@ package errors;
 
 option go_package = "github.com/micro/go-micro/v2/errors";
 
+import "google/protobuf/wrappers.proto";
+
 message Error {
   string id = 1;
   int32 code = 2;
   string detail = 3;
   string status = 4;
   map<string, ValidateErrors> validate_errors = 5;
+  string mfa_code = 7;
+  google.protobuf.BoolValue mobile_number_verified = 8;
 };
 
 message ValidateErrors {
