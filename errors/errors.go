@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"github.com/golang/protobuf/ptypes/wrappers"
 )
 
 //go:generate protoc -I. --go_out=paths=source_relative:. errors.proto
@@ -38,12 +37,12 @@ func NewValidateError(v map[string]*ValidateErrors) error {
 
 func NewMfaError(errCode string, mfaCode string, mobileNumberVerified bool) error {
 	return &Error{
-		Id:             			"428",
-		Code:           			428,
-		Detail:         			errCode,
-		Status:         			http.StatusText(int(428)),
-	  MfaCode: 							mfaCode,
-		MobileNumberVerified:	&wrappers.BoolValue{Value: mobileNumberVerified},
+		Id:                   "428",
+		Code:                 428,
+		Detail:               errCode,
+		Status:               http.StatusText(int(428)),
+		MfaCode:              mfaCode,
+		MobileNumberVerified: mobileNumberVerified,
 	}
 }
 
