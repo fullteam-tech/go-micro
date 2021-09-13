@@ -12,6 +12,7 @@ message Error {
   map<string, ValidateErrors> validate_errors = 5;
   string mfa_code = 7;
   bool mobile_number_verified = 8;
+  string mobile_number = 9;
 };
 
 message ValidateErrors {

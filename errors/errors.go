@@ -35,7 +35,7 @@ func NewValidateError(v map[string]*ValidateErrors) error {
 	}
 }
 
-func NewMfaError(errCode string, mfaCode string, mobileNumberVerified bool) error {
+func NewMfaError(errCode string, mfaCode string, mobileNumberVerified bool, mobileNumber string) error {
 	return &Error{
 		Id:                   "428",
 		Code:                 428,
@@ -43,6 +43,7 @@ func NewMfaError(errCode string, mfaCode string, mobileNumberVerified bool) erro
 		Status:               http.StatusText(int(428)),
 		MfaCode:              mfaCode,
 		MobileNumberVerified: mobileNumberVerified,
+		MobileNumber:         mobileNumber,
 	}
 }
 
