@@ -63,9 +63,12 @@ func (wh *webHandler) getService(r *http.Request) (string, error) {
 	log.Println("xxxxxxx")
 
 	if wh.s != nil {
+
+		log.Println(" we were given the service")
 		// we were given the service
 		service = wh.s
 	} else if wh.opts.Router != nil {
+		log.Println("Route")
 		// try get service from router
 		s, err := wh.opts.Router.Route(r)
 		if err != nil {
@@ -73,6 +76,7 @@ func (wh *webHandler) getService(r *http.Request) (string, error) {
 		}
 		service = s
 	} else {
+		log.Println("no route")
 		// we have no way of routing the request
 		return "", errors.New("no route found")
 	}
