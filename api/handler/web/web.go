@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/micro/go-micro/v2/logger"
 	"io"
+	"log"
 	"net"
 	"net/http"
 	"net/http/httputil"
@@ -75,6 +76,7 @@ func (wh *webHandler) getService(r *http.Request) (string, error) {
 	}
 	logger.Infof("service name", service.Name)
 	// create a random selector
+	log.Println(selector.DefaultSelector.String())
 	next, _ := selector.DefaultSelector.Select(service.Name)
 
 	// get the next node
