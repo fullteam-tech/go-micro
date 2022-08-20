@@ -4,6 +4,7 @@ package web
 import (
 	"errors"
 	"fmt"
+	"github.com/micro/go-micro/v2/logger"
 	"io"
 	"net"
 	"net/http"
@@ -28,21 +29,21 @@ type webHandler struct {
 func (wh *webHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	service, err := wh.getService(r)
 	if err != nil {
-		w.Write([]byte(err.Error()))
 		w.WriteHeader(500)
+		w.Write([]byte(err.Error()))
 		return
 	}
 
 	if len(service) == 0 {
-		w.Write([]byte("service not found"))
 		w.WriteHeader(404)
+		w.Write([]byte("service not found"))
 		return
 	}
 
 	rp, err := url.Parse(service)
 	if err != nil {
-		w.Write([]byte(err.Error()))
 		w.WriteHeader(500)
+		w.Write([]byte(err.Error()))
 		return
 	}
 
@@ -72,9 +73,9 @@ func (wh *webHandler) getService(r *http.Request) (string, error) {
 		// we have no way of routing the request
 		return "", errors.New("no route found")
 	}
-
+	logger.Infof("service name", service.Name)
 	// create a random selector
-	next := selector.Random(service.Services)
+	next, _ := selector.DefaultSelector.Select(service.Name)
 
 	// get the next node
 	s, err := next()
