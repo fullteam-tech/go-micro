@@ -28,17 +28,20 @@ type webHandler struct {
 func (wh *webHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	service, err := wh.getService(r)
 	if err != nil {
+		w.Write([]byte(err.Error()))
 		w.WriteHeader(500)
 		return
 	}
 
 	if len(service) == 0 {
+		w.Write([]byte("service not found"))
 		w.WriteHeader(404)
 		return
 	}
 
 	rp, err := url.Parse(service)
 	if err != nil {
+		w.Write([]byte(err.Error()))
 		w.WriteHeader(500)
 		return
 	}
