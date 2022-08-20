@@ -59,6 +59,8 @@ func (wh *webHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 // getService returns the service for this request from the selector
 func (wh *webHandler) getService(r *http.Request) (string, error) {
 	var service *api.Service
+	log.Println(selector.DefaultSelector.String())
+	log.Println("xxxxxxx")
 
 	if wh.s != nil {
 		// we were given the service
