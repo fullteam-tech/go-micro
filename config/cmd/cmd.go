@@ -47,7 +47,6 @@ import (
 	brokerSrv "github.com/micro/go-micro/v2/broker/service"
 
 	// registries
-	"github.com/micro/go-micro/v2/registry/etcd"
 	"github.com/micro/go-micro/v2/registry/mdns"
 	rmem "github.com/micro/go-micro/v2/registry/memory"
 	regSrv "github.com/micro/go-micro/v2/registry/service"
@@ -342,7 +341,6 @@ var (
 
 	DefaultRegistries = map[string]func(...registry.Option) registry.Registry{
 		"service": regSrv.NewRegistry,
-		"etcd":    etcd.NewRegistry,
 		"mdns":    mdns.NewRegistry,
 		"memory":  rmem.NewRegistry,
 	}
